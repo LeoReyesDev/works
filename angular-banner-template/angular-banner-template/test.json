@@ -1,0 +1,57 @@
+[
+          
+                {
+                      "category": "Resorts",
+                      "sku": "R1",
+                      "group_id": "R1",
+                      "title": "Title of product descriptions here descriptions here descriptions here descriptions here maximum 90 chars ",
+                      "price": "$1.00 ",
+                      "link": "http://google.com",
+                      "sale_price": "1",  
+                      "image_url": "images/img/slide-image-1.jpg",
+                      "sale_price_end_date": "",
+                      "partner_id": "hotel",
+                      "brand": "Omni Hotels",
+                      "desc": "SKU#:17922" // Shipping CODE
+
+                },{
+                      "category": "Resorts",
+                      "sku": "R1",
+                      "group_id": "R1",
+                      "title": "Colorful Double Old Fashioned Plastic Glasses, 16 oz.",
+                      "price": "$1.00 ",
+                      "link": "http://yahoo.com",
+                      "sale_price": "2",  
+                      "image_url": "images/img/slide-image-2.jpg",
+                      "sale_price_end_date": "",
+                      "partner_id": "hotel",
+                      "brand": "Omni Hotels",
+                      "desc": "SKU#:197437" // Shipping CODE
+                },{
+                      "category": "Resorts",
+                      "sku": "R1",
+                      "group_id": "R1",
+                      "title": "Plastic Luau Margaritas Glasses with Hibiscus Flowers, 15.9 oz.", 
+                      "price": "$1.00 ",
+                      "link": "http://bing.com",
+                      "sale_price": "3",
+                          
+                      "image_url": "images/img/slide-image-3.jpg",
+                      "sale_price_end_date": "",
+                      "partner_id": "hotel",
+                      "brand": "Omni Hotels",
+                      "desc": "SKU#:218574" // Shipping CODE
+                },{
+                      "category": "Resorts",
+                      "sku": "R1",
+                      "group_id": "R1",
+                      "title": "Gravy Train Dog Food with Chicken Chunks in Gravy, 13.2-oz. Cans", //Prod Descript
+                      "price": "$0.50 ",
+                      "link": "http://lions.com",
+                      "sale_price": "3",  
+                      "image_url": "images/img/slide-image-4.jpg",
+                      "sale_price_end_date": "",
+                      "partner_id": "hotel",
+                      "brand": "Omni Hotels",
+                      "desc": "SKU#:24559" // Shipping CODE
+                }

@@ -1,0 +1,275 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Banner JS</title>    
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js"></script>-->
+        <!-- jQuery library (served from Google) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <!-- bxSlider Javascript file -->
+    <script src="jquery.bxslider.min.js"></script>
+    <!-- bxSlider CSS file -->
+    <link href="jquery.bxslider.css" rel="stylesheet" />
+
+    
+     <style type="text/css">
+    /**
+     * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+     * http://cssreset.com
+     */
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed,
+    figure, figcaption, footer, header, hgroup,
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+    }
+    /* HTML5 display-role reset for older browsers */
+    article, aside, details, figcaption, figure,
+    footer, header, hgroup, menu, nav, section {
+      display: block;
+    }
+    body {
+      line-height: 1;
+    }
+    ol, ul {
+      list-style: none;
+    }
+    blockquote, q {
+      quotes: none;
+    }
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+      content: '';
+      content: none;
+    }
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+  </style>
+
+
+
+
+    <style>
+      #content{ width:298px; height:248px; float:left; overflow: hidden; position: relative; border: 1px solid #000; background-image: url(images/bg.png)}
+      #slide{ width:300px; float:left;position: absolute;top:72px; -webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none; }
+      #demo{float: left; position: absolute; color:yellow; z-index: 3; top:-20px;}
+      #imagesSlider{float: left; width:auto; }
+
+      .title{  font-size: 20px; top: 1px; position: absolute; text-align: center; width: 298px; height:80px; overflow:hidden;color: yellow; font-family: 'FuturaLT-Book'; color: #FFF; font-size: 13px; width: 141px; left: 149px; text-transform: uppercase; text-align: left; -webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none; line-height: 13px;}
+
+      .btn{ width: 97px;height: 23px;margin-left: 153px;float: left;cursor: pointer;z-index: 2;position: absolute;top: 97px;}
+
+      .prod-image { width:132px; margin-left:10px;}
+
+      .skuCode{font-family: 'FuturaLT-Book'; color: #FFF; font-size: 10px; position: absolute; float: left; top: 85px; left: 155px;}
+      #controls{width:140px; background-color: red; float:left;}
+
+      .texts{font-size: 30px; color: #ffcc00; top: 46px; position: absolute; float: left; left:30px;  }
+      .subTexts{font-size: 20px; color: #B5FF00; top: 30px; position: absolute; float: left; left: 110px;}
+      #cta{ float:left; position:absolute; left: 524px; top:42px;}
+
+      .bx-viewport{}
+      .bx-wrapper{}
+      #clickTagGeneral{width:300px; height:250px; float: left; }
+      #linkforImages{width:135px; height:120px; float:left; background-color: red; opacity:5;}
+
+
+
+
+      /*FONTS IMPORTED*/
+
+      @font-face {
+        font-family:'FuturaLT-Bold';
+        src: url('fonts/FuturaLT-Bold_gdi.eot');
+        src: url('fonts/FuturaLT-Bold_gdi.eot?#iefix') format('embedded-opentype'),
+          url('fonts/FuturaLT-Bold_gdi.woff') format('woff'),
+          url('fonts/FuturaLT-Bold_gdi.ttf') format('truetype'),
+          url('fonts/FuturaLT-Bold_gdi.otf') format('opentype'),
+          url('fonts/FuturaLT-Bold_gdi.svg#FuturaLT-Bold') format('svg');
+        font-weight: 700;
+        font-style: normal;
+        font-stretch: normal;
+        unicode-range: U+0020-2122;
+      }
+
+
+      @font-face {
+        font-family:'FuturaLT-Book';
+        src: url('fonts/FuturaLT-Book_gdi.eot');
+        src: url('fonts/FuturaLT-Book_gdi.eot?#iefix') format('embedded-opentype'),
+          url('fonts/FuturaLT-Book_gdi.woff') format('woff'),
+          url('fonts/FuturaLT-Book_gdi.ttf') format('truetype'),
+          url('fonts/FuturaLT-Book_gdi.otf') format('opentype'),
+          url('fonts/FuturaLT-Book_gdi.svg#FuturaLT-Book') format('svg');
+        font-weight: 400;
+        font-style: normal;
+        font-stretch: normal;
+        unicode-range: U+0020-2122;
+      }
+     
+
+    </style>
+
+    <script>
+      var sliderApp = angular.module('sliderApp', []);
+
+      sliderApp.filter('getById', function() {
+        return function(input, id) {
+          var i=0, len=input.length;
+          for (; i<len; i++) {
+            if (+input[i].id == +id) {
+              return input[i];
+            }
+          }
+          return null;
+        }
+      });
+
+      sliderApp.controller('SomeController', ['$scope', '$filter', function($scope, $filter) {
+        $scope.fish = [
+          
+                {
+                      "category": "Resorts",
+                      "sku": "R1",
+                      "group_id": "R1",
+                      "title": "Title of product descriptions here descriptions here descriptions here descriptions here maximum 90 chars ",
+                      "price": "$1.00 ",
+                      "link": "http://google.com",
+                      "sale_price": "1",  
+                      "image_url": "images/img/slide-image-1.jpg",
+                      "sale_price_end_date": "",
+                      "partner_id": "hotel",
+                      "brand": "Omni Hotels",
+                      "desc": "SKU#:17922" // Shipping CODE
+
+                },{
+                      "category": "Resorts",
+                      "sku": "R1",
+                      "group_id": "R1",
+                      "title": "Colorful Double Old Fashioned Plastic Glasses, 16 oz.",
+                      "price": "$1.00 ",
+                      "link": "http://yahoo.com",
+                      "sale_price": "2",  
+                      "image_url": "images/img/slide-image-2.jpg",
+                      "sale_price_end_date": "",
+                      "partner_id": "hotel",
+                      "brand": "Omni Hotels",
+                      "desc": "SKU#:197437" // Shipping CODE
+                },{
+                      "category": "Resorts",
+                      "sku": "R1",
+                      "group_id": "R1",
+                      "title": "Plastic Luau Margaritas Glasses with Hibiscus Flowers, 15.9 oz.", 
+                      "price": "$1.00 ",
+                      "link": "http://bing.com",
+                      "sale_price": "3",
+                          
+                      "image_url": "images/img/slide-image-3.jpg",
+                      "sale_price_end_date": "",
+                      "partner_id": "hotel",
+                      "brand": "Omni Hotels",
+                      "desc": "SKU#:218574" // Shipping CODE
+                },{
+                      "category": "Resorts",
+                      "sku": "R1",
+                      "group_id": "R1",
+                      "title": "Gravy Train Dog Food with Chicken Chunks in Gravy, 13.2-oz. Cans", //Prod Descript
+                      "price": "$0.50 ",
+                      "link": "http://lions.com",
+                      "sale_price": "3",  
+                      "image_url": "images/img/slide-image-4.jpg",
+                      "sale_price_end_date": "",
+                      "partner_id": "hotel",
+                      "brand": "Omni Hotels",
+                      "desc": "SKU#:24559" // Shipping CODE
+                }
+              
+              
+        ]
+         
+         $scope.showdetails = function(fish_id){
+             var found = $filter('getById')($scope.fish, fish_id);
+             console.log(found);
+             $scope.selected = JSON.stringify(found);
+         }
+      }]);
+
+      /*settings Sliders*/
+      $(document).ready(function(){
+        
+        
+        $('.bxslider').bxSlider({
+           slideWidth: 300,
+           slideMargin: 0,
+           mode: 'horizontal', //fade //vertical
+           pager: true,
+           speed: 900,
+           autoHover: true,
+           pause: 2000, // num milliseconds to pause on each frame
+           auto:true,
+           autoStart:true,
+         
+          
+
+        })
+
+
+         // ======================CLICK TAG GENERAL=======================
+        var clickTagGen  =  document.getElementById("clickTagGeneral");
+        var URL    =  'http://www.chango.com/'
+        var a =  document.createElement('a');
+        a.href  = URL;
+        a.appendChild(clickTagGen);
+        a.setAttribute('target', '_blank');
+        document.getElementById('content').appendChild(a);
+
+      });
+    </script>
+
+  </head>
+  <body>
+  <div id="content">
+   <div id="clickTagGeneral">
+    <div id="slide">
+      <div data-ng-app="sliderApp" data-ng-controller="SomeController">
+        <ul class="bxslider">
+          <li data-ng-repeat="slides in fish">
+            <div class="prod-image"><a ng-href="{{slides.link}}" target="_blank"><img data-ng-src="{{slides.image_url}}" /></a></div>
+            <div class="title">{{slides.title}}</div>
+            <div class="skuCode">{{slides.desc}}</div>
+            <div class="btn">
+                <a ng-href="{{slides.link}}" target="_blank"><img src="images/cta.png" alt=""></a>
+              </div>
+          </li>
+        </ul>
+      </div>
+      </div>
+      </div>
+  </div>
+
+    <script>
+   /* var slider= document.getElementById("slide");
+    TweenLite.to(slider, .5, {opacity:1,left:-728,ease:Expo.easeOut,delay:3});
+    TweenLite.to(slider, .5, {opacity:1,left:-1456,ease:Expo.easeOut,delay:6});*/
+    </script>
+  </body>
+</html>
