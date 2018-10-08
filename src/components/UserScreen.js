@@ -8,7 +8,6 @@ class UserScreen extends React.Component {
       }
     }
 
-
   // [ USER SCREEN USER  ======================================== ♛ ]
 
   render() {
