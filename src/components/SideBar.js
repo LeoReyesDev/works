@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './../css/App.css';
-import dataJson from './../data/top.json'
+import style from './style.css'
 import UserScreen from './UserScreen'
 import { TweenMax } from 'gsap'
 
+
+let urlsPokemon = []
 
 class SideBar extends React.Component {
   constructor(props) {
@@ -14,54 +16,59 @@ class SideBar extends React.Component {
       postDiv: [],
       author:'',
       erasePost:'',
-      posts: dataJson.data.children,
-      firstPost: dataJson.data.children[0],
       singlePost:{
         id:'',
         title:'',
         authorPost:'',
         thumbnail:''
-      }
+      },
+        userID:{
+          id:'',
+          name:'',
+          phone:'',
+          email:''
+
+      },
+      listUsers:[]
+
     }
   }
 
   componentDidMount() {
-    //load Last
-    this.loadFirstPost()
-    this.closeNav()
-  }
-
-  /* [Load first Post in div ========================================== ♛ */
-
-  loadFirstPost(){
-
-    let title = this.state.firstPost.data.title
-    let author = this.state.firstPost.data.author
-    let thumbnail = this.state.firstPost.data.thumbnail
-
-    this.setState({
-       singlePost: {
-         id:'',
-         title:title,
-         authorPost:author,
-         thumbnail:thumbnail
-       }
-     })
-
+    this.openNav()
+    this.listPokes()
   }
 
   /* [Click for load post inother div ================================== ♛ */
 
-  handleClick(e,t,a,divId){
+  handleClick(n,p,e){
+
+     this.showLightBox()
      this.setState({
-        singlePost: {
-          id:divId,
-          title:e,
-          authorPost:t,
-          thumbnail:a
-        }
-      })
-     console.log(" [----- POST -----] ", this.state.singlePost)
+        userID:{
+          name:n,
+          phone:p,
+          email:e
+      }
+    })
+     console.log(" [----- POST -----] ", this.state.userID)
+
+  }
+
+  targetId(i){
+     // console.log("ID: ",i)
+     // console.log("Name",this.state.listUsers[0][i].name.first)
+     // console.log("Phone",this.state.listUsers[0][i].phone)
+     // console.log("Email",this.state.listUsers[0][i].email)
+
+      this.setState({
+         userID:{
+           name:this.state.listUsers[0][i].name.first,
+           phone:this.state.listUsers[0][i].phone,
+           email:this.state.listUsers[0][i].email
+       }
+     })
+      this.showLightBox()
   }
 
   /* [Delete Posts in SideBar ========================================= ♛ */
@@ -100,26 +107,6 @@ class SideBar extends React.Component {
 
       TweenMax.to(barMenu, 0.5, {opacity:1, delay:0.3})
       TweenMax.to('#allContent', 0.3, {opacity:1})
-
-
-      let itemsPosts
-      let post
-      let num = 0.1
-
-      itemsPosts = this.state.posts
-
-      for( let i=0; i<itemsPosts.length; i++){
-        post = 'post' + i
-        document.getElementById(post).style.opacity = 0
-        let postIdDiv = '#' + post
-        num += 0.08
-        TweenMax.to(postIdDiv, 0.5, {opacity:1, delay:num})
-
-        console.log('TOTAL POSTS >>>>>>', postIdDiv)
-        console.log('Number', num)
-      }
-
-
   }
 
   closeNav() {
@@ -133,9 +120,55 @@ class SideBar extends React.Component {
   }
   /* [OPEN SIDE BAR  ================================================== ♛ */
 
+  showLightBox(){
+    document.getElementById("lightBox").style.display="flex"
+  }
+  hideLightBox(){
+    document.getElementById("lightBox").style.display="none"
+  }
+
+  listPokes(){
+
+    fetch('https://randomuser.me/api/?results=100')
+    .then(res=>res.json())
+    .then(data=>{
+      console.log("Data",data.results)
+      this.state.listUsers.push(data.results)
+      let registro = data.results.map((id,i) =>{
+        //console.log("ID",i,id.name,id.phone,id.email)
+
+           return(
+             <div className="container-items" id={"item"+i} key={i}  onClick={this.targetId.bind(this,i)} >
+               <div className="picture">
+                 <img src={id.picture.large}/>
+               </div>
+                 <div className="dataRecord">
+                   <div className="nameUser">{id.name.first} {id.name.last}</div>
+                   <div className="streetUser">Address: 3356 argyle st City: vanier State: ontario</div>
+                   <div className="phoneUser">Phone: {id.phone}</div>
+                   <div className="emailUser">Email: {id.email}</div>
+               </div>
+             </div>
+            )
+      })
+      this.setState({pokemonsAll:registro})
+    })
+
+  }
+
+
   render() {
+    console.log("DATA",this.state.userID.name)
     return(
+
       <div id="container">
+      <div id="lightBox">
+        <div className="userBox" onClick={this.hideLightBox.bind(this)}>
+          <h1>{this.state.userID.name}</h1>
+          <h2>{this.state.userID.phone}</h2>
+          <p>{this.state.userID.email}</p>
+        </div>
+      </div>
         <div id="openCont">
           <ul>
             <li><span onClick={this.openNav.bind(this)} >&#9776;</span></li>
@@ -144,43 +177,18 @@ class SideBar extends React.Component {
         </div>
         <div id="mySidenav" className="sidenav">
           <div id="barTitle">
-          <h2>Recent Posts</h2>
+          <h2>User List</h2>
           <a onClick={this.closeNav.bind(this)} className="closebtn">&times;</a>
           </div>
-            <div id="allContent">
-              {this.state.posts.map((item,i) =>
-                  <div  key={i} id={"post"+i} className="Post"
-                        onClick={
-                          this.handleClick.bind(
-                            this,
-                            item.data.title,
-                            item.data.author,
-                            item.data.thumbnail
-                            )
-                        }>
-                      <div id="Title">
-                        <h2>{item.data.author}</h2>
-                      </div>
-                      <div id="Thumbnail">
-                        <img src={item.data.thumbnail} />
-                      </div>
-                      <div id="content">
-                        <p>{item.data.title}</p>
-                      </div>
-                      <div id="footer">
-                        <button className="btnDismiss" value={i} onClick={this.dismissClick.bind(this, item.value)}>Dismiss X</button>
-                        <div id="comments">Comments: {item.data.score}</div>
-                      </div>
-                  </div>
-                )
-              }
-            </div>
+          <div id="allContent">
+            {this.state.pokemonsAll}
+          </div>
         </div>
-        <UserScreen
+     {/*   <UserScreen
             thumbnail={this.state.singlePost.thumbnail}
             authorPost={this.state.singlePost.authorPost}
             title={this.state.singlePost.title}
-        />
+        />*/}
       </div>
 
     )
