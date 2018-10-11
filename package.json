@@ -1,6 +1,6 @@
 {
-  "homepage": "https://labs.leoreyesdev.com/pokechallenge",
-  "name": "redditapp",
+  "homepage": "https://labs.leoreyesdev.com/reactjs-api",
+  "name": "pokechallenge",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

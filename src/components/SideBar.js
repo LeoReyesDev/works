@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './../css/App.css';
-import style from './style.css'
-import UserScreen from './UserScreen'
+import style from './../css/style.css'
+import LightBox from './LightBox'
 import { TweenMax } from 'gsap'
 
 
 let urlsPokemon = []
+const endPoint = 'https://randomuser.me/api/?results=50'
 
 class SideBar extends React.Component {
   constructor(props) {
@@ -26,7 +27,8 @@ class SideBar extends React.Component {
           id:'',
           name:'',
           phone:'',
-          email:''
+          email:'',
+          picture:''
 
       },
       listUsers:[]
@@ -41,57 +43,19 @@ class SideBar extends React.Component {
 
   /* [Click for load post inother div ================================== ♛ */
 
-  handleClick(n,p,e){
-
-     this.showLightBox()
-     this.setState({
-        userID:{
-          name:n,
-          phone:p,
-          email:e
-      }
-    })
-     console.log(" [----- POST -----] ", this.state.userID)
-
-  }
-
   targetId(i){
-     // console.log("ID: ",i)
-     // console.log("Name",this.state.listUsers[0][i].name.first)
-     // console.log("Phone",this.state.listUsers[0][i].phone)
-     // console.log("Email",this.state.listUsers[0][i].email)
 
       this.setState({
          userID:{
-           name:this.state.listUsers[0][i].name.first,
+           id:i,
+           name:this.state.listUsers[0][i].name.first + " " +this.state.listUsers[0][i].name.last,
            phone:this.state.listUsers[0][i].phone,
-           email:this.state.listUsers[0][i].email
+           email:this.state.listUsers[0][i].email,
+           picture:this.state.listUsers[0][i].picture.large
+
        }
      })
       this.showLightBox()
-  }
-
-  /* [Delete Posts in SideBar ========================================= ♛ */
-
-  dismissClick(id,e){
-    console.log("ID: ",e.target.value,"ERASE: ", this.state.erasePost)
-    let myDiv = "post" + e.target.value
-    document.getElementById(myDiv).style.display="none"
-    this.clearPost()
-  }
-
-  /* [Delete Posts in SideBar ========================================= ♛ */
-
-  clearPost(){
-    console.log('clear')
-    this.setState({
-       singlePost: {
-         id:'',
-         title:'',
-         authorPost:'',
-         thumbnail:''
-       }
-     })
   }
 
 
@@ -129,7 +93,7 @@ class SideBar extends React.Component {
 
   listPokes(){
 
-    fetch('https://randomuser.me/api/?results=100')
+    fetch(endPoint)
     .then(res=>res.json())
     .then(data=>{
       console.log("Data",data.results)
@@ -162,13 +126,9 @@ class SideBar extends React.Component {
     return(
 
       <div id="container">
-      <div id="lightBox">
-        <div className="userBox" onClick={this.hideLightBox.bind(this)}>
-          <h1>{this.state.userID.name}</h1>
-          <h2>{this.state.userID.phone}</h2>
-          <p>{this.state.userID.email}</p>
-        </div>
-      </div>
+        <LightBox closeLightBox={this.hideLightBox.bind(this)} image={this.state.userID.picture} name={this.state.userID.name}
+        phone={this.state.userID.phone} email={this.state.userID.email} />
+
         <div id="openCont">
           <ul>
             <li><span onClick={this.openNav.bind(this)} >&#9776;</span></li>
@@ -184,11 +144,6 @@ class SideBar extends React.Component {
             {this.state.pokemonsAll}
           </div>
         </div>
-     {/*   <UserScreen
-            thumbnail={this.state.singlePost.thumbnail}
-            authorPost={this.state.singlePost.authorPost}
-            title={this.state.singlePost.title}
-        />*/}
       </div>
 
     )
